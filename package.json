@@ -10,6 +10,8 @@
     "test:e2e": "vue-cli-service test:e2e"
   },
   "dependencies": {
+    "pug": "^2.0.3",
+    "pug-plain-loader": "^1.0.0",
     "vue": "^2.5.16",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^6.0.0",
