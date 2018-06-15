@@ -1,6 +1,6 @@
 <template lang="pug">
   .main
-    p Hello
+    p I am the main page.
 </template>
 
 
