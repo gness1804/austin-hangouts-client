@@ -1,6 +1,8 @@
 <template lang="pug">
   .places
-    p I am the places page.
+      .places-container(v-if="places.length > 0")
+        p I should not appear.
+      p(class="no-places-message" v-else) No places yet! Add one now.
 </template>
 
 <script lang="ts">
