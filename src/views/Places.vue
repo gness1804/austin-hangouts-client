@@ -2,13 +2,14 @@
   .places
       p(class="places-count") Total places: {{places.length}}
       .places-container(v-if="places.length > 0")
-        p Hit API worked!
+        PlaceContainer(v-for="place of places" v-bind:place="place" v-bind:key="place._id")
       p(class="no-places-message" v-else) No places yet! Add one now.
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import axios from 'axios';
+import PlaceContainer from './PlaceContainer.vue';
 import { IPlace } from '../models/Place';
 
 interface IData {
@@ -18,6 +19,9 @@ interface IData {
 
 export default Vue.extend({
   name: 'Places',
+  components: {
+    PlaceContainer,
+  },
   data(): IData {
     return {
       places: [],
