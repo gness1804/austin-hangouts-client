@@ -17,6 +17,7 @@ interface IData {
   loadPlacesURL: string,
 }
 
+// TODO: make it so that the res.data array is sent down as new Places
 export default Vue.extend({
   name: 'Places',
   components: {
