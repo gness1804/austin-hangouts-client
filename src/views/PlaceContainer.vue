@@ -11,6 +11,7 @@ import Vue from 'vue';
 import axios from 'axios';
 
 import { Place, IPlace } from '../models/Place';
+import confirmAction from '../helpers/confirm';
 
 export default Vue.extend({
   name: 'PlaceContainer',
@@ -22,8 +23,9 @@ export default Vue.extend({
   },
   methods: {
     deletePlace(): void {
-      // add warning
-      axios.delete(`http://localhost:7777/places/${this.place._id}`);
+      if (confirmAction(`Are you sure you want to delete ${this.place.name}?`)) {
+        axios.delete(`http://localhost:7777/places/${this.place._id}`);
+      }
     },
   },
 });
