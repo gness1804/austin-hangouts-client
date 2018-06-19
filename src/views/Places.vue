@@ -35,9 +35,10 @@ export default Vue.extend({
           const newArr: Place[] = [];
           const initPlaces = res.data;
           console.log('initPlaces:', initPlaces);
+          console.log('initPlaces:', initPlaces);
           for (let i = 0; i < initPlaces.length; i++) {
             const element = initPlaces[i];
-            const newPl = new Place(element._id, element.name, Date.now(), element.address);
+            const newPl = new Place(element._id, element.name, element.entryCreationDate, element.address);
             newArr.push(newPl);
           }
           return newArr;

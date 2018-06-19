@@ -15,5 +15,6 @@ module.exports = {
     'no-plusplus': 'off',
     'space-infix-ops': 'warn',
     'no-underscore-dangle': 'off',
+    'max-len': 'off',
   }
 }
