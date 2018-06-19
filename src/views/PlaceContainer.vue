@@ -3,10 +3,13 @@
     p(class="place-name") {{place.name}}
     p {{place.address}}
     img(srce="place.photo" alt="place.name" v-if="place.photo")
+    button(v-on:click="deletePlace") Delete
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import axios from 'axios';
+
 import { Place, IPlace } from '../models/Place';
 
 export default Vue.extend({
@@ -15,6 +18,12 @@ export default Vue.extend({
     place: {
       type: Place,
       required: true,
+    },
+  },
+  methods: {
+    deletePlace(): void {
+      // add warning
+      axios.delete(`http://localhost:7777/places/${this.place._id}`);
     },
   },
 });
