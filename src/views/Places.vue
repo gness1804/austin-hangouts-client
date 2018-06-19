@@ -1,5 +1,6 @@
 <template lang="pug">
   .places
+      h2 My Places!
       p(class="places-count") Total places: {{places.length}}
       .places-container(v-if="places.length > 0")
         PlaceContainer(v-for="place of places" v-bind:place="place" v-bind:key="place._id")
@@ -53,3 +54,10 @@ export default Vue.extend({
 });
 
 </script>
+
+<style>
+  .places {
+    text-align: center;
+  }
+</style>
+
