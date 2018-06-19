@@ -10,14 +10,13 @@
 import Vue from 'vue';
 import axios from 'axios';
 import PlaceContainer from './PlaceContainer.vue';
-import { IPlace } from '../models/Place';
+import { Place, IPlace } from '../models/Place';
 
 interface IData {
-  places: Array<IPlace>,
+  places: Place[],
   loadPlacesURL: string,
 }
 
-// TODO: make it so that the res.data array is sent down as new Places
 export default Vue.extend({
   name: 'Places',
   components: {
@@ -33,7 +32,17 @@ export default Vue.extend({
     loadPlaces(): void {
       axios.get(this.loadPlacesURL)
         .then((res) => {
-          this.places = res.data;
+          const newArr: Place[] = [];
+          const initPlaces = res.data;
+          for (let i = 0; i < initPlaces.length; i++) {
+            const element = initPlaces[i];
+            const newPl = new Place(element.name, Date.now(), element.address);
+            newArr.push(newPl);
+          }
+          return newArr;
+        })
+        .then((places) => {
+          this.places = places;
         })
         .catch((err) => { throw new Error(`loadPlaces call failed: ${err}`); });
     },
