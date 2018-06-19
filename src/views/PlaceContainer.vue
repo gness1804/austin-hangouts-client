@@ -7,14 +7,13 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { IPlace } from '../models/Place';
+import { Place, IPlace } from '../models/Place';
 
-// TODO: change the type to Place
 export default Vue.extend({
   name: 'PlaceContainer',
   props: {
     place: {
-      type: Object,
+      type: Place,
       required: true,
     },
   },
