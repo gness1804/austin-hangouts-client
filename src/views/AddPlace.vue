@@ -15,6 +15,8 @@ interface IData {
   address: string,
 }
 
+// TODO: replace alert in showToast with real toast
+
 export default Vue.extend({
   name: 'AddPlace',
   data(): IData {
@@ -25,6 +27,7 @@ export default Vue.extend({
   },
   methods: {
     addPlace(): void {
+      const _name = this.Uname;
       if (!this.Uname || !this.address) {
         alert('Error: please enter both a name and an address.');
         return;
@@ -32,7 +35,23 @@ export default Vue.extend({
       axios.post('http://localhost:7777/places', {
         name: this.Uname,
         address: this.address,
-      });
+      })
+        .then(() => {
+          this.clearFields();
+        })
+        .then(() => {
+          this.showToast(`${_name} successfully added.`);
+        })
+        .catch((err: Error) => {
+          throw new Error(`There was a problem with the addPlace method: ${err}`);
+        });
+    },
+    clearFields(): void {
+      this.Uname = '';
+      this.address = '';
+    },
+    showToast(msg: string) {
+      alert(msg);
     },
   },
 });
