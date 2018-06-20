@@ -12,10 +12,10 @@ import Vue from 'vue';
 import axios from 'axios';
 import PlaceContainer from './PlaceContainer.vue';
 import { Place, IPlace } from '../models/Place';
+import config from '../../config';
 
 interface IData {
   places: Place[],
-  loadPlacesURL: string,
 }
 
 export default Vue.extend({
@@ -26,16 +26,15 @@ export default Vue.extend({
   data(): IData {
     return {
       places: [],
-      loadPlacesURL: 'http://localhost:7777/places',
     };
   },
   methods: {
     deletePlace(place: Place): void {
-      axios.delete(`http://localhost:7777/places/${place._id}`);
+      axios.delete(`${config.url}/places/${place._id}`);
       window.location.reload();
     },
     loadPlaces(): void {
-      axios.get(this.loadPlacesURL)
+      axios.get(`${config.url}/places`)
         .then((res) => {
           const newArr: Place[] = [];
           const initPlaces = res.data;

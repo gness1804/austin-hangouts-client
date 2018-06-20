@@ -9,6 +9,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import axios from 'axios';
+import config from '../../config';
 
 interface IData {
   Uname: string,
@@ -32,7 +33,7 @@ export default Vue.extend({
         alert('Error: please enter both a name and an address.');
         return;
       }
-      axios.post('http://localhost:7777/places', {
+      axios.post(`${config.url}/places`, {
         name: this.Uname,
         address: this.address,
       })
