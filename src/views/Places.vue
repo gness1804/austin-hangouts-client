@@ -3,7 +3,7 @@
       h2 My Places!
       p(class="places-count") Total places: {{places.length}}
       .places-container(v-if="places.length > 0")
-        PlaceContainer(v-for="place of places" v-bind:place="place" v-bind:key="place._id")
+        PlaceContainer(v-for="place of places" v-bind:place="place" v-bind:key="place._id" v-on:deletePlace="deletePlace")
       p(class="no-places-message" v-else) No places yet! Add one now.
 </template>
 
@@ -30,6 +30,10 @@ export default Vue.extend({
     };
   },
   methods: {
+    deletePlace(place: Place): void {
+      axios.delete(`http://localhost:7777/places/${place._id}`);
+      window.location.reload();
+    },
     loadPlaces(): void {
       axios.get(this.loadPlacesURL)
         .then((res) => {
