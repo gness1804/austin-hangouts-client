@@ -24,7 +24,7 @@ export default Vue.extend({
   methods: {
     deletePlace(): void {
       if (confirmAction(`Are you sure you want to delete ${this.place.name}?`)) {
-        axios.delete(`http://localhost:7777/places/${this.place._id}`);
+        this.$emit('deletePlace', this.place);
       }
     },
   },
