@@ -16,5 +16,6 @@ module.exports = {
     'space-infix-ops': 'warn',
     'no-underscore-dangle': 'off',
     'max-len': 'off',
+    'no-alert': 'off',
   }
 }
