@@ -1,8 +1,8 @@
 <template lang="pug">
     .add-place
       h2 Add a Place
-      input(placeholder="Name" v-model.trim="Uname")
-      input(placeholder="Address" v-model.trim="address")
+      input(placeholder="Name" v-model.trim="Uname" autocomplete='name')
+      input(placeholder="Address" v-model.trim="address" autocomplete='address')
       button(v-on:click="addPlace") Add!
 </template>
 
