@@ -32,7 +32,17 @@ export default Vue.extend({
       axios.post('http://localhost:7777/places', {
         name: this.Uname,
         address: this.address,
-      });
+      })
+        .then(() => {
+          this.clearFields();
+        })
+        .catch((err: Error) => {
+          throw new Error(`There was a problem with the addPlace method: ${err}`);
+        });
+    },
+    clearFields(): void {
+      this.Uname = '';
+      this.address = '';
     },
   },
 });
