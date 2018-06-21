@@ -4,6 +4,7 @@
       input(placeholder="Name" v-model.trim="Uname" autocomplete='name')
       input(placeholder="Address" v-model.trim="address" autocomplete='address')
       button(v-on:click="addPlace") Add!
+      p(class="message-output") {{msg}}
 </template>
 
 <script lang="ts">
@@ -14,9 +15,10 @@ import config from '../../config';
 interface IData {
   Uname: string,
   address: string,
+  msg?: string,
 }
 
-// TODO: replace alert in showToast with real toast
+// TODO: replace text popup in showToast with real toast
 
 export default Vue.extend({
   name: 'AddPlace',
@@ -24,6 +26,7 @@ export default Vue.extend({
     return {
       Uname: '',
       address: '',
+      msg: '',
     };
   },
   methods: {
@@ -51,8 +54,11 @@ export default Vue.extend({
       this.Uname = '';
       this.address = '';
     },
-    showToast(msg: string) {
-      alert(msg);
+    showToast(_msg: string) {
+      this.msg = _msg;
+      setTimeout(() => {
+        this.msg = '';
+      }, 3000);
     },
   },
 });
