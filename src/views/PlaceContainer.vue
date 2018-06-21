@@ -1,6 +1,7 @@
 <template lang="pug">
   .place-container
     p(class="place-name") {{place.name}}
+    img(src="../assets/pencil.png" alt="Edit place" v-on:click="editPlace" class="pencil-icon" title="Edit place")
     p {{place.address}}
     img(srce="place.photo" alt="place.name" v-if="place.photo")
     button(v-on:click="deletePlace") Delete
@@ -27,6 +28,9 @@ export default Vue.extend({
         this.$emit('deletePlace', this.place);
       }
     },
+    editPlace(): void {
+
+    },
   },
 });
 </script>
@@ -41,5 +45,11 @@ export default Vue.extend({
 
   .place-name {
     font-weight: 700;
+  }
+
+  .pencil-icon {
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
   }
 </style>
