@@ -28,6 +28,7 @@ export default new Router({
       path: '/edit-place/:placeId',
       name: 'edit-place',
       component: EditPlace,
+      props: true,
     },
   ],
 });
