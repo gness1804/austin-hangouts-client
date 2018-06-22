@@ -11,6 +11,7 @@
 import Vue from 'vue';
 import axios from 'axios';
 import config from '../../config';
+import router from '@/router';
 
 interface Foo {
   name: string,
@@ -33,7 +34,8 @@ export default Vue.extend({
   },
   methods: {
     cancel(): void {
-
+      // looks for dirty data and calls goBack() method
+      this.goBack();
     },
     getPlace(): void {
       axios.get(`${config.url}/places/${this.placeId}`)
@@ -46,6 +48,9 @@ export default Vue.extend({
           throw new Error(`Error: problem with getPlace: ${err}`);
         });
     },
+    goBack(): void {
+      router.go(-1);
+    },
     saveEdits(): void {
       if (!this.Uname || !this.address) {
         alert('Error: please enter both a name and an address.');
@@ -55,6 +60,9 @@ export default Vue.extend({
         name: this.Uname,
         address: this.address,
       })
+        .then(() => {
+          this.goBack();
+        })
         .catch((err: Error) => {
           throw new Error(`Error: saveEdits failed: ${err}`);
         });
