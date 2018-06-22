@@ -13,6 +13,7 @@ import axios from 'axios';
 
 import { Place, IPlace } from '../models/Place';
 import confirmAction from '../helpers/confirm';
+import config from '../../config';
 
 export default Vue.extend({
   name: 'PlaceContainer',
@@ -29,7 +30,7 @@ export default Vue.extend({
       }
     },
     editPlace(): void {
-
+      this.$router.push(`/edit-place/${this.place._id}`);
     },
   },
 });
