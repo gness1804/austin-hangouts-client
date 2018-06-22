@@ -50,9 +50,14 @@ export default Vue.extend({
       if (!this.Uname || !this.address) {
         alert('Error: please enter both a name and an address.');
         return;
-      } else {
-        // hit the server with the updatePlace method
       }
+      axios.put(`${config.url}/places/${this.placeId}`, {
+        name: this.Uname,
+        address: this.address,
+      })
+        .catch((err: Error) => {
+          throw new Error(`Error: saveEdits failed: ${err}`);
+        });
     },
   },
   mounted(): void {
