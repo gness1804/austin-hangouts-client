@@ -9,9 +9,11 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import router from '@/router';
 import axios from 'axios';
 import config from '../../config';
-import router from '@/router';
+import thereAreChanges from '../helpers/thereAreChanges';
+import confirmAction from '../helpers/confirm';
 
 interface Foo {
   name: string,
@@ -21,6 +23,8 @@ interface Foo {
 interface IData {
   Uname: string,
   address: string,
+  initUname: string,
+  initAddress: string,
 }
 
 export default Vue.extend({
@@ -30,19 +34,40 @@ export default Vue.extend({
     return {
       Uname: '',
       address: '',
+      initUname: '',
+      initAddress: '',
     };
   },
   methods: {
     cancel(): void {
-      // looks for dirty data and calls goBack() method
-      this.goBack();
+      const {
+        Uname,
+        address,
+        initUname,
+        initAddress,
+      } = this;
+
+      if (thereAreChanges({
+        Uname,
+        address,
+        initUname,
+        initAddress,
+      })) {
+        if (confirmAction('Are you sure you want to leave without saving changes?')) {
+          this.goBack();
+        }
+      } else {
+        this.goBack();
+      }
     },
     getPlace(): void {
       axios.get(`${config.url}/places/${this.placeId}`)
         .then((res) => {
           const _place = res.data;
-          this.Uname = res.data.name;
-          this.address = res.data.address;
+          this.Uname = _place.name;
+          this.address = _place.address;
+          this.initUname = _place.name;
+          this.initAddress = _place.address;
         })
         .catch((err) => {
           throw new Error(`Error: problem with getPlace: ${err}`);
