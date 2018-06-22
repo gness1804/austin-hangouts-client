@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from './views/Home.vue';
 import Places from './views/Places.vue';
 import AddPlace from './views/AddPlace.vue';
+import EditPlace from './views/EditPlace.vue';
 
 Vue.use(Router);
 
@@ -22,6 +23,12 @@ export default new Router({
       path: '/add-place',
       name: 'add-place',
       component: AddPlace,
+    },
+    {
+      path: '/edit-place/:placeId',
+      name: 'edit-place',
+      component: EditPlace,
+      props: true,
     },
   ],
 });
