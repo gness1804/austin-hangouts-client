@@ -1,6 +1,10 @@
 <template lang="pug">
   .edit-place
-    p I am the EditPlace component.
+    .edit-place-form
+      input(placeholder="Name" v-model.trim="Uname" autocomplete='name')
+      input(placeholder="Address" v-model.trim="address" autocomplete='address')
+      button(v-on:click="saveEdits") Save!
+      button(v-on:click="cancel") Cancel
 </template>
 
 <script lang="ts">
@@ -28,6 +32,9 @@ export default Vue.extend({
     };
   },
   methods: {
+    cancel(): void {
+
+    },
     getPlace(): void {
       axios.get(`${config.url}/places/${this.placeId}`)
         .then((res) => {
@@ -38,6 +45,14 @@ export default Vue.extend({
         .catch((err) => {
           throw new Error(`Error: problem with getPlace: ${err}`);
         });
+    },
+    saveEdits(): void {
+      if (!this.Uname || !this.address) {
+        alert('Error: please enter both a name and an address.');
+        return;
+      } else {
+        // hit the server with the updatePlace method
+      }
     },
   },
   mounted(): void {
